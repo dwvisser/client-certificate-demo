@@ -4,8 +4,8 @@ Client Certificate Demo
 The server's private key is in `server.key`, which we use for our server certificate (`server.pem`). This is a self-signed certificate, issued by ourselves (Demo CA).
 
 We have two PKCS#12 client certificates
- - `alice.pfx` which was issued by us (the issuer is Demo CA)
- - `bob.pfx`, which is a self-signed certificate (the issuer is Bob himself)
+ - `alice.p12` which was issued by us (the issuer is Demo CA)
+ - `bob.p12`, which is a self-signed certificate (the issuer is Bob himself)
 
 To try the demo, import both client certificates into your browser. In case of Firefox, go to Settings -> Advanced -> View certificates -> Import. Leave the passphrase empty.
 
@@ -16,9 +16,9 @@ Notice that the browser only offers Alice's certificate: Bob's certificate is no
 You can circumvent this by using cURL to call the authenticate endpoint. Note the `--insecure` option: we need this to make cURL accept our Demo CA server certificate.
 
 ```
-$ curl --insecure --cert alice.pfx --cert-type p12 https://localhost:9999/authenticate
+$ curl --insecure --cert alice.p12 --cert-type p12 https://localhost:9999/authenticate
 Hello Alice, your certificate was issued by Demo CA!
-$ curl --insecure --cert bob.pfx --cert-type p12 https://localhost:9999/authenticate
+$ curl --insecure --cert bob.p12 --cert-type p12 https://localhost:9999/authenticate
 Sorry Bob, certificates from Bob are not welcome here.
 ```
 
